@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Diary</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tanggal_2_maret">Tanggal : 2 Maret</string>
+    <string name="loren_ipsum">Loren ipsum..............</string>
+    <string name="masukan_diarymu">Masukan Diarymu</string>
+
+
+    <string name="tanggal"><![CDATA[<b></b>]]></string>
+    <string name="isi"><![CDATA[<b></b>]]></string>
+    <string name="simpan">Simpan</string>
+</resources>
