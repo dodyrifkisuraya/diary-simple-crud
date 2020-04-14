@@ -13,22 +13,23 @@
         android:layout_height="match_parent"
         tools:context=".view.HomeFragment">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+<!--            <TextView-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
 <!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                tools:listitem="@layout/diary_item" />-->
-            <TextView
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{diaryViewModel.diaryAllString}"/>
-        </ScrollView>
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@{diaryViewModel.diaryAllString}"/>-->
+<!--        </ScrollView>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/diary_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/diary_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"

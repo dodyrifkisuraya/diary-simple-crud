@@ -25,5 +25,9 @@
         <argument
             android:name="diary_key"
             app:argType="long" />
+        <argument
+            android:name="isi"
+            app:argType="string" />
+
     </fragment>
 </navigation>

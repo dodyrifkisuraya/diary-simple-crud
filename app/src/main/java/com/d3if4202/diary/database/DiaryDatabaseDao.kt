@@ -23,4 +23,10 @@ interface DiaryDatabaseDao {
 
     @Query("SELECT * FROM diary_table ORDER BY diaryId DESC")
     fun getAllDiary(): LiveData<List<Diary>>
+
+    @Query("SELECT * FROM diary_table WHERE diaryId = :key")
+    fun getDiaryId(key : Long): LiveData<Diary>
+
+    @Query("SELECT isi FROM diary_table WHERE diaryId = :key")
+    fun getIsi(key: Long): String
 }

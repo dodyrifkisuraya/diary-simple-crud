@@ -3,6 +3,7 @@ package com.d3if4202.diary.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -11,12 +12,17 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.d3if4202.diary.R
+import com.d3if4202.diary.adapterRecycleView.DiaryAdapter
+import com.d3if4202.diary.adapterRecycleView.DiaryListener
 import com.d3if4202.diary.database.Diary
 import com.d3if4202.diary.database.DiaryDatabase
 import com.d3if4202.diary.database.DiaryDatabaseDao
 import com.d3if4202.diary.databinding.FragmentHomeBinding
 import com.d3if4202.diary.viewModel.DiaryViewModel
 import com.d3if4202.diary.viewModel.DiaryViewModelFactory
+import kotlinx.coroutines.delay
+import kotlin.concurrent.timerTask
+
 //CRETED BY DODY RIFKI SURAYA
 
 class HomeFragment : Fragment() {
@@ -48,17 +54,31 @@ class HomeFragment : Fragment() {
         binding.diaryViewModel = diaryViewModel
         binding.setLifecycleOwner (this)
 
-        diaryViewModel.navigateToInputDiary.observe(viewLifecycleOwner, Observer {
-            it -> it?.let {
-            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInputDiaryFragment(it.diaryId))
-            Log.e("ERR",it.diaryId.toString())
-            diaryViewModel.doneNavigating()
-        }
+
+
+        diaryViewModel.navigateToInputDataDiary.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                val pesan = diaryViewModel.getIsiDiary(it).toString()
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInputDiaryFragment(it, pesan))
+                diaryViewModel.onInputDataDiaryNavigated()
+            }
         })
 
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInputDiaryFragment(0L))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInputDiaryFragment(0L,""))
         }
+
+        //recycle
+        val adapter = DiaryAdapter(DiaryListener {
+            diaryId -> diaryViewModel.onDiaryClicked(diaryId)
+        })
+        binding.diaryList.adapter = adapter
+
+        diaryViewModel.diaryAll.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return binding.root
     }

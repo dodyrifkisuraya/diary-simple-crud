@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/textView"
+    <data>
+        <variable
+            name="diary"
+            type="com.d3if4202.diary.database.Diary" />
+        <variable
+            name="clickListener"
+            type="com.d3if4202.diary.adapterRecycleView.DiaryListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tanggal_2_maret" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="@{() -> clickListener.onClick(diary)}">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/loren_ipsum" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/tanggal_2_maret"
+                app:tanggalDiary="@{diary}"/>
+
+            <TextView
+                android:id="@+id/tv_isi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loren_ipsum"
+                app:isiPesanDiary="@{diary}"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grey" />
+    </androidx.cardview.widget.CardView>
+</layout>
